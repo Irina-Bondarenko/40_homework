@@ -1,61 +1,38 @@
 "use strict";
 
-void function () {
-  const objForFreezing = {
-    fruits: {
-      banana: 3,
-      apple: 5,
-      dragonFruit: 2,
+void (function () {
+  let user = {
+    data: {
+      a: 1,
+      b: 2,
+      c: 3,
+      d: {
+        a1: 1,
+        b1: 2,
+        c1: 3,
+        d1: {
+          a2: 3,
+          b2: 3,
+          c2: 3,
+        },
+      },
     },
-    vegetables: {
-      cucumber: 3,
-      tomato: 4,
-      potato: 8,
-    },
-    milkProduct: {
-      milk: 500,
-      yogurt: 300,
-      cheese: {
-        one: 1,
-        two: 2,
-        three: 3,
-      }
-    },
-    salt: 100,
-    sugar: "no",
   };
 
   function freezeFunction(objForFreezing) {
     // Object.freeze(objForFreezing);
-
-    const objValuesArray = Object.values(objForFreezing);
-
-    step2(objValuesArray)
-
-  function step2 (objValuesArray) {
-
-      let values = null;
-
-    for (let key in objValuesArray) {
-      const abc = Object.values(objValuesArray[key]);
-
-      for (let key2 in abc) {
-
-        if (typeof abc[key2] === "object") {
-          console.log("it is object")
-        }
+    for (let key in objForFreezing) {
+      if (typeof objForFreezing[key] === "object") {
+        Object.freeze(objForFreezing[key]);
+        return freezeFunction(objForFreezing[key]);
       }
-
-
     }
-
   }
 
+  freezeFunction(user);
 
-  }
-
-  freezeFunction(objForFreezing);
-
-  // objForFreezing.milkProduct.cheese = 300;
-  // objForFreezing.sugar = "2 spoons";
-}();
+  // user.data = 300;
+  // user.data.d = 300;
+  // user.data.d.d1 = 300;
+  // user.data.d.c2 = "2 spoons";
+})();
