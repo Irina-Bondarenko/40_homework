@@ -20,7 +20,7 @@ void (function () {
   };
 
   function freezeFunction(objForFreezing) {
-    // Object.freeze(objForFreezing);
+
     for (let key in objForFreezing) {
       if (typeof objForFreezing[key] === "object") {
         Object.freeze(objForFreezing[key]);
