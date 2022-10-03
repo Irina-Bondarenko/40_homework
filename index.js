@@ -15,24 +15,47 @@ void function () {
     milkProduct: {
       milk: 500,
       yogurt: 300,
-      cheese: 400,
+      cheese: {
+        one: 1,
+        two: 2,
+        three: 3,
+      }
     },
     salt: 100,
     sugar: "no",
   };
 
   function freezeFunction(objForFreezing) {
-    Object.freeze(objForFreezing);
+    // Object.freeze(objForFreezing);
 
     const objValuesArray = Object.values(objForFreezing);
 
+    step2(objValuesArray)
+
+  function step2 (objValuesArray) {
+
+      let values = null;
+
     for (let key in objValuesArray) {
-      Object.freeze(objValuesArray[key]);
+      const abc = Object.values(objValuesArray[key]);
+
+      for (let key2 in abc) {
+
+        if (typeof abc[key2] === "object") {
+          console.log("it is object")
+        }
+      }
+
+
     }
+
+  }
+
+
   }
 
   freezeFunction(objForFreezing);
 
-  objForFreezing.milkProduct.cheese = 300;
-  objForFreezing.sugar = "2 spoons";
+  // objForFreezing.milkProduct.cheese = 300;
+  // objForFreezing.sugar = "2 spoons";
 }();
